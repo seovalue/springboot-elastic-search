@@ -1,0 +1,46 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'me'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // jpa
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // elastic-search
+    implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+//    implementation group: 'org.elasticsearch.client', name: 'elasticsearch-rest-high-level-client', version: '7.13.0'
+//    implementation group: 'org.elasticsearch.client', name: 'elasticsearch-rest-client', version: '7.13.0'
+//    implementation group: 'org.elasticsearch', name: 'elasticsearch', version: '7.13.0'
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // mysql
+    runtimeOnly 'mysql:mysql-connector-java'
+
+    // test
+    testImplementation 'io.rest-assured:rest-assured:3.3.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    runtimeOnly 'com.h2database:h2'
+
+    // bind
+    implementation 'javax.xml.bind:jaxb-api:2.1'
+}
+
+test {
+    useJUnitPlatform()
+}
