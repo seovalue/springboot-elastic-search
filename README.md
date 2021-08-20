@@ -1,4 +1,9 @@
 # Elastic Search
+
+## 진행 상황
+- [ ] ElasticsearchRepository 테스트 불가 -> 이유 확인 아직 안됨.
+- [ ] ElasticsearchRepository 사용 시 JPARepository를 별도로 구성하여 두 repo에 save를 해야하는지에 대해서 레퍼런스 필요
+
 ## Elastic search 용어 정리
 elastic search는 키워드가 어떠한 도큐먼트에 있는지를 저장한다.
 
