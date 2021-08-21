@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import me.elastic.domain.Post;
+import me.elastic.domain.PostImpl;
 
 @Getter
 @NoArgsConstructor
@@ -15,7 +16,8 @@ public class PostResponse {
     private String title;
     private String content;
 
-    public static PostResponse of(Post post) {
+    public static PostResponse of(Post postI) {
+        PostImpl post = postI.toPostImpl();
         return PostResponse.builder()
                 .id(post.getId())
                 .title(post.getTitle())

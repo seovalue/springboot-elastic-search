@@ -1,9 +1,16 @@
 package me.elastic.presentation;
 
+import lombok.Getter;
 import me.elastic.application.PostService;
+import me.elastic.exception.ErrorResponse;
+import me.elastic.exception.NotFoundException;
 import me.elastic.presentation.dto.PostRequest;
 import me.elastic.presentation.dto.PostResponse;
+import me.elastic.presentation.dto.PostTitleRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 public class PostController {
@@ -31,5 +39,16 @@ public class PostController {
     public ResponseEntity<PostResponse> findById(@PathVariable Long id) {
         PostResponse response = postService.findById(id);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/posts")
+    public ResponseEntity<List<PostResponse>> findAllByTitle(@RequestParam String title, Pageable pageable) {
+        List<PostResponse> responses = postService.findAllByTitle(title, pageable);
+        return ResponseEntity.ok(responses);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleException(NotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse.of(e.getMessage()));
     }
 }
