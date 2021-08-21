@@ -1,28 +1,26 @@
 package me.elastic.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Document(indexName = "blog")
-@Entity
 @Getter
 @NoArgsConstructor
-@Setter
 public class Post {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Field(type = FieldType.Text)
     private String title;
+
+    @Field(type = FieldType.Text)
     private String content;
 
     @Builder
