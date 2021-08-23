@@ -42,8 +42,8 @@ public class PostService {
         return PostResponse.of(postEsImpl);
     }
 
-    public List<PostResponse> findAllByTitle(String title, Pageable pageable) {
-        Page<PostEsImpl> posts = postEsRepository.findByTitle(title, pageable);
+    public List<PostResponse> findAllByTitle(String title) {
+        List<PostEsImpl> posts = postEsRepository.findByTitle(title);
         return posts.stream()
                 .map(PostResponse::of)
                 .collect(Collectors.toList());

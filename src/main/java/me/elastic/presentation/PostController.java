@@ -42,8 +42,8 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public ResponseEntity<List<PostResponse>> findAllByTitle(@RequestParam String title, Pageable pageable) {
-        List<PostResponse> responses = postService.findAllByTitle(title, pageable);
+    public ResponseEntity<List<PostResponse>> findAllByTitle(@RequestParam String title) {
+        List<PostResponse> responses = postService.findAllByTitle(title);
         return ResponseEntity.ok(responses);
     }
 
